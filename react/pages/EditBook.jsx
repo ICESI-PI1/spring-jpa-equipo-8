@@ -10,10 +10,10 @@ function EditBook() {
 
     const [libro,setLibro] = useState({})
     const[title,setTitle] = useState(libro.title)
-    const[realeaseDate,setRealeaseDate] = useState("")
+    const[releaseDate,setReleaseDate] = useState("")
     const[autor,setAutor] = useState({})
     const [autores, setAutores] = useState([])
-    const fechaEnFormatoDeseado = libro.realeaseDate ? libro.realeaseDate.split("T")[0] : "";
+  
 
 
 
@@ -29,8 +29,8 @@ function EditBook() {
           editedBook.title = title;
         }
       
-        if (realeaseDate !== libro.realeaseDate) {
-          editedBook.realeaseDate = realeaseDate;
+        if (releaseDate !== libro.releaseDate) {
+          editedBook.releaseDate = releaseDate;
         }
       
         if (autor.id !== libro.autor.id) {
@@ -101,9 +101,10 @@ function EditBook() {
                         <div className="col-12 col-sm-6">
                             <label htmlFor="title" className="form-label">Título</label>
                             <input type="text" defaultValue={libro.title} name="title" id="title" required className="form-control" onInput={t => setTitle(t.target.value)}/>
+                            
                         </div>
 
-                        <div className="col-12 col-sm-6">
+                        <div className="pt-4 col-12 col-sm-6" style={{ marginTop: '23px' }}>
                             <Select
                                 defaultValue = {autores.map((autor)=>({label:autor.name, value:autor.id})).filter((autor)=>autor.label == autorName)}
                                 options={autores.map((autor)=>({label:autor.name, value:autor.id}))}
@@ -113,7 +114,7 @@ function EditBook() {
 
                         <div className="col-12 col-sm-6">
                             <label htmlFor="editorial" className="form-label">Fecha de estreno</label>
-                            <input type="date" defaultValue={fechaEnFormatoDeseado} name="date" id="date" autoComplete="postal-code" className="form-control" onInput={t => setRealeaseDate(t.target.value)}/>
+                            <input type="date" defaultValue={fechaEnFormatoDeseado} name="date" id="date" autoComplete="postal-code" className="form-control" onInput={t => setReleaseDate(t.target.value)}/>
                         </div>
 
                     </div>
