@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "book")
 public class Book {
 
     @Id
@@ -12,7 +11,7 @@ public class Book {
     private Long id;
 
     private String title;
-
+    @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
     @ManyToOne

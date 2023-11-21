@@ -15,6 +15,7 @@ function AddBook() {
     const [id,setId] = useState()
 
     const onAddBook =() => {
+        console.log(realeaseDate)
         let book = {id, title, realeaseDate, autor}
         instance.post("libros", book)
         .then(res => {
