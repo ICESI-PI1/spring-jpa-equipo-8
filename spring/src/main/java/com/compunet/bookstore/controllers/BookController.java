@@ -1,5 +1,6 @@
 package com.compunet.bookstore.controllers;
 
+import com.compunet.bookstore.persistence.dto.BookDto;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.services.impl.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,17 @@ public class BookController {
         this.bookService = bookService;
     }
     @GetMapping("/libros")
-    public List<Book> listBooks() {
+    public List<BookDto> listBooks() {
         return bookService.getAllBook();
     }
 
     @GetMapping("/libros/{id}")
-    public Optional<Book> detailedBook(@PathVariable Long id) {
+    public Optional<BookDto> detailedBook(@PathVariable Long id) {
         return bookService.findById(id);
     }
 
     @PostMapping("/libros")
     public void saveBook(@RequestBody Book book){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         System.out.println(book);
         bookService.save(book);
     }
