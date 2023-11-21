@@ -2,6 +2,8 @@ package com.compunet.bookstore;
 
 import com.compunet.bookstore.persistence.dto.AuthorDto;
 import com.compunet.bookstore.persistence.dto.BookDto;
+import com.compunet.bookstore.persistence.dto.mapper.AuthorDtoMapper;
+import com.compunet.bookstore.persistence.dto.mapper.BookDtoMapper;
 import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.persistence.repositories.IAuthorRepository;
@@ -24,6 +26,9 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class BookstoreApplicationTests {
+	private BookDtoMapper bookMapper = new BookDtoMapper();
+	private AuthorDtoMapper authorMapper = new AuthorDtoMapper();
+
 	@MockBean
 	private IAuthorRepository autorRepository;
 
@@ -43,7 +48,7 @@ class BookstoreApplicationTests {
 
 		List<AuthorDto> actualAuthors = autorService.getAllAuthor();
 
-		assertEquals(expectedAuthors, actualAuthors);
+		assertEquals(expectedAuthors.stream().map(authorMapper).toList(), actualAuthors);
 	}
 
 	@Test
@@ -54,7 +59,7 @@ class BookstoreApplicationTests {
 		Optional<AuthorDto> actualAuthor = autorService.getDetails(1L);
 
 		assertTrue(actualAuthor.isPresent());
-		assertEquals(expectedAuthor, actualAuthor.get());
+		assertEquals(authorMapper.apply(expectedAuthor), actualAuthor.get());
 	}
 
 	@Test
@@ -83,7 +88,7 @@ class BookstoreApplicationTests {
 
 		AuthorDto author = autorService.getDetails(1L).get();
 
-		assertEquals(updatedAuthor,author);
+		assertEquals(authorMapper.apply(updatedAuthor),author);
 
 	}
 
@@ -111,7 +116,7 @@ class BookstoreApplicationTests {
 
 		List<BookDto> actualBooks = autorService.getBookByAutor(1L);
 
-		assertEquals(expectedBooks, actualBooks);
+		assertEquals(expectedBooks.stream().map(bookMapper).toList(), actualBooks);
 	}
 
 
@@ -133,7 +138,7 @@ class BookstoreApplicationTests {
 		Optional<BookDto> actualBook = bookService.findById(1L);
 
 		assertTrue(actualBook.isPresent());
-		assertEquals(expectedBook, actualBook.get());
+		assertEquals(bookMapper.apply(expectedBook), actualBook.get());
 	}
 
 	@Test
@@ -153,7 +158,7 @@ class BookstoreApplicationTests {
 
 		BookDto book = bookService.findById(1L).get();
 
-		assertEquals(updatedBook,book);
+		assertEquals(bookMapper.apply(updatedBook),book);
 	}
 
 	@Test
@@ -182,7 +187,7 @@ class BookstoreApplicationTests {
 
 		List<BookDto> actualBooks = bookService.getAllBook();
 
-		assertEquals(expectedBooks, actualBooks);
+		assertEquals(expectedBooks.stream().map(bookMapper).toList(), actualBooks);
 	}
 
 
