@@ -1,5 +1,7 @@
 package com.compunet.bookstore.controllers;
 
+import com.compunet.bookstore.persistence.dto.AuthorDto;
+import com.compunet.bookstore.persistence.dto.BookDto;
 import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.services.impl.AuthorService;
@@ -22,13 +24,13 @@ public class AuthorController {
     }
 
     @GetMapping("/autores")
-    public List<Author> getAutors(){
+    public List<AuthorDto> getAutors(){
         return autorService.getAllAuthor();
     }
 
 
     @GetMapping("/autores/{id}")
-    public Optional<Author> getAutor(@PathVariable("id") Long id){
+    public Optional<AuthorDto> getAutor(@PathVariable("id") Long id){
         return autorService.getDetails(id);
     }
 
@@ -46,7 +48,7 @@ public class AuthorController {
     }
 
     @GetMapping("autores/{id}/libros")
-    public List<Book> getBooksByAutor(@PathVariable("id") Long id){
+    public List<BookDto> getBooksByAutor(@PathVariable("id") Long id){
         return autorService.getBookByAutor(id);
     }
 

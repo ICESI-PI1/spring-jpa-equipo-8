@@ -1,5 +1,7 @@
 package com.compunet.bookstore.services.impl;
 
+import com.compunet.bookstore.persistence.dto.BookDto;
+import com.compunet.bookstore.persistence.dto.mapper.BookDtoMapper;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.persistence.repositories.IBookRepository;
 import com.compunet.bookstore.services.IBookService;
@@ -11,13 +13,14 @@ import java.util.Optional;
 
 @Service
 public class BookService implements IBookService {
+    private BookDtoMapper mapper = new BookDtoMapper();
 
     @Autowired
     private IBookRepository bookRepository;
 
     @Override
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Optional<BookDto> findById(Long id) {
+        return bookRepository.findById(id).map(mapper);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public List<Book> getAllBook() {
-        return bookRepository.findAllByOrderByTitleAsc();
+    public List<BookDto> getAllBook() {
+        return bookRepository.findAll().stream().map(mapper).toList();
     }
 }

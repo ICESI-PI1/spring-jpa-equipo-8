@@ -1,5 +1,7 @@
 package com.compunet.bookstore;
 
+import com.compunet.bookstore.persistence.dto.AuthorDto;
+import com.compunet.bookstore.persistence.dto.BookDto;
 import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.persistence.repositories.IAuthorRepository;
@@ -39,7 +41,7 @@ class BookstoreApplicationTests {
 		List<Author> expectedAuthors = Arrays.asList(new Author(1L, "Autor1", "Nacionalidad1"), new Author(2L, "Autor2", "Nacionalidad2"));
 		when(autorRepository.findAllByOrderByNombreAsc()).thenReturn(expectedAuthors);
 
-		List<Author> actualAuthors = autorService.getAllAuthor();
+		List<AuthorDto> actualAuthors = autorService.getAllAuthor();
 
 		assertEquals(expectedAuthors, actualAuthors);
 	}
@@ -49,7 +51,7 @@ class BookstoreApplicationTests {
 		Author expectedAuthor = new Author(1L, "Autor1", "Nacionalidad1");
 		when(autorRepository.findById(1L)).thenReturn(Optional.of(expectedAuthor));
 
-		Optional<Author> actualAuthor = autorService.getDetails(1L);
+		Optional<AuthorDto> actualAuthor = autorService.getDetails(1L);
 
 		assertTrue(actualAuthor.isPresent());
 		assertEquals(expectedAuthor, actualAuthor.get());
@@ -79,7 +81,7 @@ class BookstoreApplicationTests {
 
 		verify(autorRepository).save(updatedAuthor);
 
-		Author author = autorService.getDetails(1L).get();
+		AuthorDto author = autorService.getDetails(1L).get();
 
 		assertEquals(updatedAuthor,author);
 
@@ -107,7 +109,7 @@ class BookstoreApplicationTests {
 		List<Book> expectedBooks = Arrays.asList(new Book(1L, "Libro1", new Date(), autor));
 		when(autorRepository.getBookByAutor(1L)).thenReturn(expectedBooks);
 
-		List<Book> actualBooks = autorService.getBookByAutor(1L);
+		List<BookDto> actualBooks = autorService.getBookByAutor(1L);
 
 		assertEquals(expectedBooks, actualBooks);
 	}
@@ -128,7 +130,7 @@ class BookstoreApplicationTests {
 		Book expectedBook = new Book(1L, "Libro1", new Date(), new Author(1L, "Autor1", "Nacionalidad1"));
 		when(bookRepository.findById(1L)).thenReturn(Optional.of(expectedBook));
 
-		Optional<Book> actualBook = bookService.findById(1L);
+		Optional<BookDto> actualBook = bookService.findById(1L);
 
 		assertTrue(actualBook.isPresent());
 		assertEquals(expectedBook, actualBook.get());
@@ -149,7 +151,7 @@ class BookstoreApplicationTests {
 
 		verify(bookRepository).save(updatedBook);
 
-		Book book = bookService.findById(1L).get();
+		BookDto book = bookService.findById(1L).get();
 
 		assertEquals(updatedBook,book);
 	}
@@ -176,9 +178,9 @@ class BookstoreApplicationTests {
 				new Book(1L, "Libro 1", new Date(), new Author(1L, "Autor 1", "Nacionalidad 1")),
 				new Book(2L, "Libro 2", new Date(), new Author(2L, "Autor 2", "Nacionalidad 2"))
 		);
-		when(bookRepository.findAllByOrderByTitleAsc()).thenReturn(expectedBooks);
+		when(bookRepository.findAll()).thenReturn(expectedBooks);
 
-		List<Book> actualBooks = bookService.getAllBook();
+		List<BookDto> actualBooks = bookService.getAllBook();
 
 		assertEquals(expectedBooks, actualBooks);
 	}

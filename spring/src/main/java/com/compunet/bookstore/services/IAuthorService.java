@@ -1,16 +1,17 @@
 package com.compunet.bookstore.services;
 
+import com.compunet.bookstore.persistence.dto.AuthorDto;
+import com.compunet.bookstore.persistence.dto.BookDto;
 import com.compunet.bookstore.persistence.models.Author;
-import com.compunet.bookstore.persistence.models.Book;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IAuthorService {
-    List<Author> getAllAuthor();
-    Optional<Author> getDetails(Long id);
+    List<AuthorDto> getAllAuthor();
+    Optional<AuthorDto> getDetails(Long id);
     void createAutor(Author author);
     void editAutor(Author author);
     void deleteAutor(Long id);
-    List<Book> getBookByAutor(Long autorId);
+    List<BookDto> getBookByAutor(Long autorId);
 }
