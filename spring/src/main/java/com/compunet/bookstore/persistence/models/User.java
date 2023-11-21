@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 @Entity
-@Table(name = "user")
+@Table(name = "Myuser")
 @Data
 @Builder
 @NoArgsConstructor
@@ -29,7 +29,6 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private AuthRole role;
     
     @Override

@@ -68,7 +68,7 @@ const BookInfo = () => {
             </div>
             <div className="col-6">
               <dt className="">Fecha de Estreno</dt>
-              <dd className="text-muted">{libro.realeaseDate}</dd>
+              <dd className="text-muted">{libro.releaseDate}</dd>
             </div>
             <div className="col-6">
               <dt className="">Autor</dt>

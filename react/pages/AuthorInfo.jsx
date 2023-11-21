@@ -63,7 +63,8 @@ const AuthorInfo = () => {
             
           </dl>
         </div>
-        <div className="d-flex pb-3 pt-3 justify-content-end">
+        <div className="d-flex pb-3 pt-3 justify-content-between">
+          <a href={`/AuthorBooks/${autor.id}`} className="btn" >Libros</a>
           <a href={`/`} className="btn" >Volver</a>
         </div>
       </div>
