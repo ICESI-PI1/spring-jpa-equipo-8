@@ -9,13 +9,13 @@ import Select from 'react-select';
 function AddBook() {
 
     const [title, setTitle] = useState("")
-    const [realeaseDate, setRealeaseDate] = useState("")
+    const [releaseDate, setReleaseDate] = useState("")
     const [autores, setAutores] = useState([])
     const [autor, setAutor] = useState({})
-    const [id,setId] = useState()
 
     const onAddBook =() => {
-        let book = {id, title, realeaseDate, autor}
+        console.log(releaseDate)
+        let book = {title, releaseDate, autor}
         instance.post("libros", book)
         .then(res => {
             if (res.status == 200) {
@@ -77,7 +77,7 @@ function AddBook() {
 
                         <div className="col-12 col-sm-6">
                             <label htmlFor="author" className="form-label">Fecha de estreno</label>
-                            <input type="date" name="realeaseDate" id="realeaseDate" required className="form-control" value={realeaseDate} onInput={t => setRealeaseDate(t.target.value)} />
+                            <input type="date" name="releaseDate" id="releaseDate" required className="form-control" value={releaseDate} onInput={t => setReleaseDate(t.target.value)} />
                         </div>
 
                         <div className="col-12 col-sm-6">

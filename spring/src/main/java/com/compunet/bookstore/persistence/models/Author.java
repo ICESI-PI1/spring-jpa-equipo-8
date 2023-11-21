@@ -3,7 +3,6 @@ package com.compunet.bookstore.persistence.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "autor")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

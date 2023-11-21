@@ -2,7 +2,7 @@ package com.compunet.bookstore.controllers;
 
 import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
-import com.compunet.bookstore.services.impl.AutorService;
+import com.compunet.bookstore.services.impl.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +12,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping
 @CrossOrigin(maxAge = 3600)
-public class AutorController {
+public class AuthorController {
 
-    private final AutorService autorService;
+    private final AuthorService autorService;
 
     @Autowired
-    public AutorController(AutorService autorService) {
-        this.autorService = autorService;
+    public AuthorController(AuthorService authorService) {
+        this.autorService = authorService;
     }
 
     @GetMapping("/autores")

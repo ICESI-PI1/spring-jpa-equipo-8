@@ -10,6 +10,7 @@ import EditBook from '../pages/EditBook'
 import EditAuthor from '../pages/EditAuthor'
 import BookInfo from '../pages/BookInfo'
 import AuthorInfo from '../pages/AuthorInfo'
+import AuthorBooks from '../pages/AuthorBooks'
 
 import ProtectedRoute from '../pages/ProtectedRoute';
 
@@ -45,6 +46,10 @@ const Router = () => (
 
       <Route path="/AuthorInfo" element={<ProtectedRoute />}>
         <Route exact path='/AuthorInfo/:id' element={<AuthorInfo />} />
+      </Route>
+
+      <Route path="/AuthorBooks" element={<ProtectedRoute />}>
+        <Route exact path='/AuthorBooks/:id' element={<AuthorBooks />} />
       </Route>
     </Routes>
   </BrowserRouter>
