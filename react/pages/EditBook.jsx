@@ -15,15 +15,14 @@ function EditBook() {
     const [autores, setAutores] = useState([])
   
 
-
-
-    
     let {id} = useParams()
 
     const onEditBook = () => {
     
         const editedBook = { ...libro };
       
+        console.log(title)
+        console.log(releaseDate)
       
         if (title !== libro.title) {
           editedBook.title = title;
@@ -106,15 +105,16 @@ function EditBook() {
 
                         <div className="pt-4 col-12 col-sm-6" style={{ marginTop: '23px' }}>
                             <Select
-                                defaultValue = {autores.map((autor)=>({label:autor.name, value:autor.id})).filter((autor)=>autor.label == autorName)}
-                                options={autores.map((autor)=>({label:autor.name, value:autor.id}))}
+                                defaultValue={autores.find((autor) => autor.name === autorName)
+                                                      ? { label: autorName, value: autor.id } : "Hola"}
+                                options={autores.map((autor) => ({ label: autor.name, value: autor.id }))}
                                 onChange={handleSelectChange}
                             />
                         </div>
 
                         <div className="col-12 col-sm-6">
                             <label htmlFor="editorial" className="form-label">Fecha de estreno</label>
-                            <input type="date" defaultValue={fechaEnFormatoDeseado} name="date" id="date" autoComplete="postal-code" className="form-control" onInput={t => setReleaseDate(t.target.value)}/>
+                            <input type="date" defaultValue={libro.releaseDate} name="date" id="date" autoComplete="postal-code" className="form-control" onInput={t => setReleaseDate(t.target.value)}/>
                         </div>
 
                     </div>

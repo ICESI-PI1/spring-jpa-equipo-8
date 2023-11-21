@@ -15,7 +15,7 @@ public class Book {
     private Date releaseDate;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     public Book() {
