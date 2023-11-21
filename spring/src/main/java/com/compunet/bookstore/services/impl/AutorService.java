@@ -1,6 +1,6 @@
 package com.compunet.bookstore.services.impl;
 
-import com.compunet.bookstore.persistence.models.Autor;
+import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.persistence.repositories.IAutorRepository;
 import com.compunet.bookstore.services.IAuthorService;
@@ -15,32 +15,36 @@ public class AutorService implements IAuthorService {
 
     @Autowired
     private IAutorRepository autorRepository;
+
     @Override
-    public List<Autor> getAllAuthor() {
-        return autorRepository.getAllAuthor();
+    public List<Author> getAllAuthor() {
+        return autorRepository.findAllByOrderByNombreAsc();
     }
 
     @Override
-    public Optional<Autor> getDetails(Long id) {
-        return autorRepository.getDetails(id);
+    public Optional<Author> getDetails(Long id) {
+        return autorRepository.findById(id);
     }
 
     @Override
-    public void createAutor(Autor autor) { autorRepository.createAutor(autor); }
+    public void createAutor(Author author) {
+        autorRepository.save(author);
+    }
 
     @Override
-    public void editAutor(Autor autor) { autorRepository.editAutor(autor); }
+    public void editAutor(Author author) {
+        autorRepository.save(author);
+    }
 
     @Override
-    public void deleteAutor(Long id) { autorRepository.deleteAutor(id); }
+    public void deleteAutor(Long id) {
+        autorRepository.deleteById(id);
+    }
 
     @Override
     public List<Book> getBookByAutor(Long autorId) {
         return autorRepository.getBookByAutor(autorId);
     }
 
-    public Long getNextId() { return autorRepository.getNextId();   }
 
-    public void sort() {autorRepository.sort();
-    }
 }

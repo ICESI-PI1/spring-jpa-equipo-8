@@ -1,6 +1,6 @@
 package com.compunet.bookstore.controllers;
 
-import com.compunet.bookstore.persistence.models.Autor;
+import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
 import com.compunet.bookstore.services.impl.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +22,22 @@ public class AutorController {
     }
 
     @GetMapping("/autores")
-    public List<Autor> getAutors(){
+    public List<Author> getAutors(){
         return autorService.getAllAuthor();
     }
 
-    @GetMapping("/autorId")
-    public Long getNextId() {return autorService.getNextId();}
 
     @GetMapping("/autores/{id}")
-    public Optional<Autor> getAutor(@PathVariable("id") Long id){
+    public Optional<Author> getAutor(@PathVariable("id") Long id){
         return autorService.getDetails(id);
     }
 
     @PostMapping("/autores")
-    public void createAutor(@RequestBody Autor autor){autorService.createAutor(autor);}
+    public void createAutor(@RequestBody Author author){autorService.createAutor(author);}
 
     @PutMapping("autores/{id}")
-    public void editAutor(@RequestBody Autor autor){
-        autorService.editAutor(autor);
-        autorService.sort();
+    public void editAutor(@RequestBody Author author){
+        autorService.editAutor(author);
     }
 
     @DeleteMapping("/autores/{id}")

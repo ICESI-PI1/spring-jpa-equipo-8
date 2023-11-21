@@ -19,11 +19,8 @@ public class BookController {
     }
     @GetMapping("/libros")
     public List<Book> listBooks() {
-        return bookService.getAll();
+        return bookService.getAllBook();
     }
-
-    @GetMapping("/libroId")
-    public Long getNextId() {return bookService.getNextId();}
 
     @GetMapping("/libros/{id}")
     public Optional<Book> detailedBook(@PathVariable Long id) {
@@ -39,7 +36,6 @@ public class BookController {
     public void editBook(@PathVariable Long id, @RequestBody Book book){
         book.setId(id);
         bookService.edit(book);
-        bookService.sort();
     }
 
     @DeleteMapping("/libros/{id}")

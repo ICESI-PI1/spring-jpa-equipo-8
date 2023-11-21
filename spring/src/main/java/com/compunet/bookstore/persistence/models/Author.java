@@ -1,26 +1,22 @@
 package com.compunet.bookstore.persistence.models;
 
-import org.springframework.stereotype.Component;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "autor")
-public class Autor {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nationality")
     private String nationality;
 
-    public Autor(){
+    public Author(){
 
     }
-    public Autor(long id, String name, String nationality) {
+    public Author(long id, String name, String nationality) {
         this.id = id;
         this.name = name;
         this.nationality = nationality;
