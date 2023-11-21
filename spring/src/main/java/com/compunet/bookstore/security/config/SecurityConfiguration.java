@@ -39,7 +39,7 @@ public class SecurityConfiguration {
         http.cors(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.OPTIONS).permitAll());
 
-        http.authorizeHttpRequests(request -> request.requestMatchers("/**")
+        http.authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**")
                 .permitAll().anyRequest().authenticated())
 
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
