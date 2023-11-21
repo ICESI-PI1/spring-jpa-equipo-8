@@ -1,8 +1,8 @@
 package com.compunet.bookstore;
 
-import com.compunet.bookstore.persistence.models.Autor;
+import com.compunet.bookstore.persistence.models.Author;
 import com.compunet.bookstore.persistence.models.Book;
-import com.compunet.bookstore.persistence.repositories.IAutorRepository;
+import com.compunet.bookstore.persistence.repositories.IAuthorRepository;
 import com.compunet.bookstore.persistence.repositories.IBookRepository;
 import com.compunet.bookstore.services.IAuthorService;
 import com.compunet.bookstore.services.IBookService;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class BookstoreApplicationTests {
 	@MockBean
-	private IAutorRepository autorRepository;
+	private IAuthorRepository autorRepository;
 
 	@Autowired
 	private IAuthorService autorService;
@@ -38,20 +37,20 @@ class BookstoreApplicationTests {
 
 	@Test
 	public void whenGetAllAuthor_thenAuthorListShouldBeReturned() {
-		List<Autor> expectedAuthors = Arrays.asList(new Autor(1L, "Autor1", "Nacionalidad1"), new Autor(2L, "Autor2", "Nacionalidad2"));
-		when(autorRepository.findAll()).thenReturn(expectedAuthors);
+		List<Author> expectedAuthors = Arrays.asList(new Author(1L, "Autor1", "Nacionalidad1"), new Author(2L, "Autor2", "Nacionalidad2"));
+		when(autorRepository.findAllByOrderByNombreAsc()).thenReturn(expectedAuthors);
 
-		List<Autor> actualAuthors = autorService.getAllAuthor();
+		List<Author> actualAuthors = autorService.getAllAuthor();
 
 		assertEquals(expectedAuthors, actualAuthors);
 	}
 
 	@Test
 	public void whenGetDetails_withValidId_thenAuthorShouldBeReturned() {
-		Autor expectedAuthor = new Autor(1L, "Autor1", "Nacionalidad1");
+		Author expectedAuthor = new Author(1L, "Autor1", "Nacionalidad1");
 		when(autorRepository.findById(1L)).thenReturn(Optional.of(expectedAuthor));
 
-		Optional<Autor> actualAuthor = autorService.getDetails(1L);
+		Optional<Author> actualAuthor = autorService.getDetails(1L);
 
 		assertTrue(actualAuthor.isPresent());
 		assertEquals(expectedAuthor, actualAuthor.get());
@@ -59,7 +58,7 @@ class BookstoreApplicationTests {
 
 	@Test
 	public void whenCreateAuthor_thenAuthorShouldBeSaved() {
-		Autor newAuthor = new Autor(null, "Nuevo Autor", "Nacionalidad");
+		Author newAuthor = new Author(5L, "Nuevo Autor", "Nacionalidad");
 
 		autorService.createAutor(newAuthor);
 
@@ -70,9 +69,9 @@ class BookstoreApplicationTests {
 
 	@Test
 	public void whenGetBookByAuthor_withValidAuthorId_thenBookListShouldBeReturned() {
-		Autor autor = new Autor(1L, "Autor1", "Nacionalidad1");
+		Author autor = new Author(1L, "Autor1", "Nacionalidad1");
 		List<Book> expectedBooks = Arrays.asList(new Book(1L, "Libro1", new Date(), autor));
-		when(bookRepository.findByAutorId(1L)).thenReturn(expectedBooks);
+		when(autorRepository.getBookByAutor(1L)).thenReturn(expectedBooks);
 
 		List<Book> actualBooks = autorService.getBookByAutor(1L);
 
@@ -81,7 +80,7 @@ class BookstoreApplicationTests {
 
 	@Test
 	public void whenSaveBook_thenBookShouldBeSaved() {
-		Book newBook = new Book(null, "Nuevo Libro", new Date(), new Autor(1L, "Autor1", "Nacionalidad1"));
+		Book newBook = new Book(null, "Nuevo Libro", new Date(), new Author(1L, "Autor1", "Nacionalidad1"));
 
 		bookService.save(newBook);
 
@@ -90,7 +89,7 @@ class BookstoreApplicationTests {
 
 	@Test
 	public void whenFindById_withValidId_thenBookShouldBeReturned() {
-		Book expectedBook = new Book(1L, "Libro1", new Date(), new Autor(1L, "Autor1", "Nacionalidad1"));
+		Book expectedBook = new Book(1L, "Libro1", new Date(), new Author(1L, "Autor1", "Nacionalidad1"));
 		when(bookRepository.findById(1L)).thenReturn(Optional.of(expectedBook));
 
 		Optional<Book> actualBook = bookService.findById(1L);
