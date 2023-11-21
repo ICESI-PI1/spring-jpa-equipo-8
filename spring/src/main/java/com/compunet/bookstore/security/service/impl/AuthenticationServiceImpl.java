@@ -1,11 +1,11 @@
 package com.compunet.bookstore.security.service.impl;
 
+import com.compunet.bookstore.persistence.repositories.IUserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.compunet.bookstore.persistence.models.User;
-import com.compunet.bookstore.persistence.repositories.impl.UserRepository;
 import com.compunet.bookstore.security.config.AuthRole;
 import com.compunet.bookstore.security.payload.request.SignUpRequest;
 import com.compunet.bookstore.security.payload.request.SigninRequest;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 

@@ -11,17 +11,12 @@ import java.util.Optional;
 
 @Service
 public class BookService implements IBookService {
-    @Autowired
+
     private IBookRepository bookRepository;
 
     @Override
     public Optional<Book> findById(Long id) {
         return bookRepository.findById(id);
-    }
-
-    @Override
-    public List<Book> getAll() {
-        return bookRepository.getAll();
     }
 
     @Override
@@ -41,12 +36,11 @@ public class BookService implements IBookService {
 
     @Override
     public void edit(Book book){
-        bookRepository.edit(book);
-    }
-    @Override
-    public void sort(){
-        bookRepository.sort();
+        bookRepository.save(book);
     }
 
-    public Long getNextId() {return bookRepository.getNextId();}
+    @Override
+    public List<Book> getAllBook() {
+        return bookRepository.findAllByOrderByTitleAsc();
+    }
 }

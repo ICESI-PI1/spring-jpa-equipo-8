@@ -11,25 +11,22 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "release_date")
-    @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
     @ManyToOne
     @JoinColumn(name = "autor_id", nullable = false)
-    private Autor autor;
+    private Author author;
 
     public Book() {
     }
 
-    public Book(Long id, String title, Date releaseDate, Autor autor){
+    public Book(Long id, String title, Date releaseDate, Author author){
         this.id = id;
         this.title = title;
         this.releaseDate = releaseDate;
-        this.autor = autor;
+        this.author = author;
     }
 
     public Long getId() {
@@ -56,17 +53,17 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    public Autor getAutor() {
-        return autor;
+    public Author getAutor() {
+        return author;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public void setAutor(Author author) {
+        this.author = author;
     }
 
     @Override
     public String toString() {
-        return "Book(id: " + id + "; title: " + title + "; release date: " + releaseDate + "; author: " + autor.getName() + ")";
+        return "Book(id: " + id + "; title: " + title + "; release date: " + releaseDate + "; author: " + author.getName() + ")";
     }
 
 }

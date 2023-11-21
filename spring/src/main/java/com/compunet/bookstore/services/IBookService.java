@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface IBookService {
     void save(Book book);
     Optional<Book> findById(Long id);
-    List<Book> getAll();
+    List<Book> getAllBook();
     void deleteById(Long id);
     void edit(Book book);
-    void sort();
+
 }
