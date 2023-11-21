@@ -26,7 +26,6 @@ function List() {
     }
   }
 
-  console.log(libros)
   useEffect(()=> {getLibros()},[])
 
   const getAutores = async () => {
